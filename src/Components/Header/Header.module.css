@@ -1,0 +1,52 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color:  #1C1F58;
+    padding: 10px 50px;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+.logoSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+
+    color: white;
+    font-family: "Nunito-Italic";
+    font-size: 20px;
+    
+
+}
+
+.loginSection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 50px;
+
+    color: white;
+    font-family: "Nunito-Light";
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.reg{
+    padding: 10px 30px;
+    background-color: white;
+    color: #1C1F58;
+    border-radius: 20px;
+}
+.reg:hover{
+    transition: 0.3s ease;
+    background-color: #e0e0e0;
+}
+.logo{
+    width: 30%;
+}
