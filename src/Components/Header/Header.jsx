@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
         <div className={styles.logoSection}>
-            <img src={Logo} alt=""  className={styles.logo}/>
+            <img src={Logo} alt="logo"  className={styles.logo}/>
             <h1>SIMPLE MONEY</h1>
         </div>
         <div className={styles.loginSection}>
