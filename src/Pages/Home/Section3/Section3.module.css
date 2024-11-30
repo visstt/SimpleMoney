@@ -3,14 +3,14 @@
   flex-direction: column;
   align-items: center;
   text-align: left;
-  padding: 20px;
   background-color: #fff7e6;
+  padding: 30px 0 30px 30px;
 }
 .header {
   font-family: "Nunito";
   font-size: 2em;
   font-weight: bold;
-  color: #2d2d2d;
+  color: #1c1f58;
   margin-bottom: 20px;
 }
 .content {
@@ -18,10 +18,9 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  max-width: 1200px;
+  align-items: center;
 }
 .text-section {
-  flex: 1;
   padding-right: 20px;
 }
 .text-section div {
@@ -30,13 +29,13 @@
 .wrapper h3 {
   font-family: "Nunito";
   font-size: 1.2em;
-  color: #2d2d2d;
+  color: #1c1f58;
   margin-bottom: 10px;
 }
 .wrapper p {
   font-family: "Nunito";
   font-size: 1em;
-  color: #2d2d2d;
+  color: #1c1f58;
   margin: 0;
 }
 .text-section img {
@@ -44,27 +43,29 @@
   height: 50px;
   margin-right: 10px;
 }
-.image-section {
-  flex: 1;
+.textSection {
+  max-width: 45%;
+}
+.imageSection {
   display: flex;
   justify-content: center;
   align-items: center;
+  max-width: 50%;
 }
-.image-section img {
-  max-width: 100%;
+.imageSection img {
+  max-width: 700px;
   height: auto;
 }
 .button {
-  background-color: #a3e635;
-  font-family: "Nunito";
-  color: #2d2d2d;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  font-weight: bold;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  text-align: center;
+  background-color: #aee865;
+  border: none;
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 50px;
+  font-family: "Nunito";
+  font-size: 18px;
+  color: #1c1f58;
   margin-top: 20px;
 }
 
@@ -73,4 +74,11 @@
   flex-direction: row;
   align-items: center;
   gap: 30px;
+}
+
+@media (max-width: 1100px) {
+  .imageSection img {
+    max-width: 500px;
+    height: auto;
+  }
 }

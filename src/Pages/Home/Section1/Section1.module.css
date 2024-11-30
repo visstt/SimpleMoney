@@ -25,12 +25,13 @@
 }
 
 .man {
-  width: 100%;
+  width: 500зч;
   height: 730px;
   margin-top: 5%;
 }
 
 .btn {
+  cursor: pointer;
   background-color: #aee865;
   border: none;
   border-radius: 20px;
@@ -43,7 +44,16 @@
 
 @media (max-width: 1100px) {
   .man {
-    width: 380px;
-    height: 700px;
+    width: 300px;
+    height: 400px;
+  }
+
+  .textBlock h1 {
+    font-size: 50px;
+    text-align: center;
+  }
+  .textBlock h3 {
+    font-size: 22px;
+    text-align: center;
   }
 }

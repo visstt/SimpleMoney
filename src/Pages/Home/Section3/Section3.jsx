@@ -43,12 +43,7 @@ export default function Section3() {
           </div>
         </div>
         <div className={styles.imageSection}>
-          <img
-            alt="Скриншот приложения Simple Money на ноутбуке и смартфоне"
-            height="400"
-            src="https://storage.googleapis.com/a1aa/image/DigE2Bna4UatIpTLN0GcXIGmHEd5UmOzDSqLzV0toFU4df6JA.jpg"
-            width="600"
-          />
+          <img src={pk} alt=""  />
         </div>
       </div>
       <button className={styles.button}>

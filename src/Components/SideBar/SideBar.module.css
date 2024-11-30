@@ -1,0 +1,67 @@
+.sidebar {
+  width: 300px;
+  background-color: #8a8cc7;
+  color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px;
+  width: 150px;
+  height: 80px;
+}
+
+.title {
+  font-size: 30px;
+  text-align: center;
+  font-family: "Nunito";
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  margin: 40px 0;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.menuItem i {
+  margin-right: 15px;
+  font-size: 24px;
+}
+
+.menuItem:hover {
+  transform: scale(1.1);
+}
+
+.active {
+  font-weight: bold;
+}
+
+.logout {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.logout i {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.logout:hover {
+  transform: scale(1.1);
+}
