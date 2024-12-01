@@ -11,6 +11,7 @@ import Registr from "./Pages/Auth/Registr";
 import Plan from "./Pages/Plan/Plan";
 import Cookies from "js-cookie";
 import BudgetPage from "./Pages/Budget/BudgetPage";
+import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -45,6 +46,14 @@ function App() {
           element={
             <ProtectedRoute>
               <BudgetPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/category"
+          element={
+            <ProtectedRoute>
+              <CategoryPage />
             </ProtectedRoute>
           }
         />
