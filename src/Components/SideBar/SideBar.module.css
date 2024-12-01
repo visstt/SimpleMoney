@@ -48,6 +48,7 @@
 }
 
 .logout {
+  margin-top: 50px;
   position: absolute;
   bottom: 20px;
   left: 20px;
@@ -64,4 +65,17 @@
 
 .logout:hover {
   transform: scale(1.1);
+}
+.active {
+  font-weight: bold;
+}
+
+.dot {
+  margin-left: 10px;
+  color: #fff;
+}
+.linkLogout {
+  background-color: #8a8cc7;
+  border: none;
+  color: #fff;
 }

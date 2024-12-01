@@ -12,13 +12,14 @@
   box-sizing: border-box;
 }
 .content h1 {
+  margin-left: 100%;
   font-size: 36px;
   background-color: #8a8cc7;
   color: white;
   padding: 10px;
   text-align: center;
   border-radius: 10px;
-  width: 30%;
+  width: 50%;
   margin: 0 auto;
 }
 .content .controls {
@@ -71,7 +72,7 @@
   margin-bottom: 10px;
 }
 .content table {
-  width: 100%;
+  width: 700px;
   border-collapse: collapse;
   margin-top: 20px;
 }

@@ -28,10 +28,22 @@ const Login = () => {
         throw new Error("Ошибка при выполнении запроса");
       }
 
-      const token = await response.text();
+      const data = await response.json(); // Предполагаем, что сервер возвращает JSON
+      const { token, person } = data; // Извлекаем токен и объект person из ответа
+      const { personId, name: personName } = person; // Извлекаем personId и name
+
+      // Сохраняем данные в куки
       Cookies.set("token", token, { expires: 10 });
+      Cookies.set("personId", personId, { expires: 10 });
+      Cookies.set("personName", personName, { expires: 10 });
+
+      // Выводим данные в консоль
+      console.log("Token:", token);
+      console.log("Person ID:", personId);
+      console.log("Person Name:", personName);
+
       alert("Вход выполнен успешно!");
-      navigate("/budget");
+      navigate("/category");
     } catch (error) {
       console.error("Ошибка:", error);
       alert("Не удалось войти");
@@ -78,3 +90,4 @@ const Login = () => {
 };
 
 export default Login;
+  

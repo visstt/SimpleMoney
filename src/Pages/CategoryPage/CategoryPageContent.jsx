@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Cookies from "js-cookie"; // Импортируем библиотеку для работы с куками
 import styles from "./CategoryPage.module.css";
 
 const CategoryPageContent = () => {
@@ -10,7 +11,7 @@ const CategoryPageContent = () => {
     categoryId: null,
   });
   const [activeTab, setActiveTab] = useState("расходы"); // "расходы" или "доходы"
-  const personId = 2;
+  const personId = Cookies.get("personId"); // Получаем personId из куков
 
   const fetchCategories = async () => {
     try {
@@ -77,12 +78,12 @@ const CategoryPageContent = () => {
           categoryId: formData.categoryId || "",
           categoryType: formData.categoryType,
           categoryName: formData.categoryName,
-          personId: String(personId),
+          personId: String(personId), // Используем personId из куков
         })
       : new URLSearchParams({
           categoryType: formData.categoryType,
           categoryName: formData.categoryName,
-          personId: String(personId),
+          personId: String(personId), // Используем personId из куков
         });
 
     try {

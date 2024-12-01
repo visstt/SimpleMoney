@@ -13,6 +13,8 @@ import Cookies from "js-cookie";
 import BudgetPage from "./Pages/Budget/BudgetPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
 import AccountPage from "./Pages/AccountPage/AccountPage";
+import IncomePage from "./Pages/IncomePage/IncomePage";
+import ExpencePage from "./Pages/Expense/ExpencePage";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -63,6 +65,22 @@ function App() {
           element={
             <ProtectedRoute>
               <AccountPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/income"
+          element={
+            <ProtectedRoute>
+              <IncomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/expenses"
+          element={
+            <ProtectedRoute>
+              <ExpencePage />
             </ProtectedRoute>
           }
         />
