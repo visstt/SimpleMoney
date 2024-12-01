@@ -30,7 +30,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li className={styles.menuItem}>
-          <Link to="/" className={styles.link}>
+          <Link to="/account" className={styles.link}>
             <i className="fas fa-receipt"></i> Счета
           </Link>
         </li>

@@ -12,6 +12,7 @@ import Plan from "./Pages/Plan/Plan";
 import Cookies from "js-cookie";
 import BudgetPage from "./Pages/Budget/BudgetPage";
 import CategoryPage from "./Pages/CategoryPage/CategoryPage";
+import AccountPage from "./Pages/AccountPage/AccountPage";
 
 function App() {
   const ProtectedRoute = ({ children }) => {
@@ -54,6 +55,14 @@ function App() {
           element={
             <ProtectedRoute>
               <CategoryPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/account"
+          element={
+            <ProtectedRoute>
+              <AccountPage />
             </ProtectedRoute>
           }
         />
