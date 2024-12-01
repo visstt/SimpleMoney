@@ -2,18 +2,20 @@ import React, { useState, useEffect } from "react";
 import styles from "./CategoryPage.module.css";
 
 const CategoryPageContent = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [categories, setCategories] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
-    categoryType: "расходы", // Тип категории: "доходы" или "расходы"
+    categoryType: "расходы",
     categoryName: "",
+    categoryId: null,
   });
-  const [activeTab, setActiveTab] = useState("расходы");
+  const [activeTab, setActiveTab] = useState("расходы"); // "расходы" или "доходы"
+  const personId = 2;
 
   const fetchCategories = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/category/getСostCategories/${activeTab}-2`
+        `http://localhost:8080/category/getСostCategories/${activeTab}-${personId}`
       );
       const data = await response.json();
       setCategories(data);
@@ -22,18 +24,87 @@ const CategoryPageContent = () => {
     }
   };
 
-  const handleTabSwitch = (tab) => {
-    setActiveTab(tab);
-    fetchCategories(); // Загружаем категории соответствующего типа
-  };
-
   const handleAddClick = () => {
+    setFormData({
+      categoryType: activeTab,
+      categoryName: "",
+      categoryId: null,
+    });
     setIsModalOpen(true);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setFormData({ categoryType: activeTab, categoryName: "" });
+  const handleEditClick = (category) => {
+    setFormData({
+      categoryType: category.categoryType,
+      categoryName: category.categoryName,
+      categoryId: category.categoryId,
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleDeleteClick = async (categoryId) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/category/deleteCategory`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({ categoryId }),
+        }
+      );
+
+      if (response.ok) {
+        alert("Категория удалена!");
+        fetchCategories();
+      } else {
+        const errorData = await response.text();
+        alert(`Ошибка: ${errorData || "Не удалось удалить категорию"}`);
+      }
+    } catch (error) {
+      alert("Ошибка удаления категории!");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const url = formData.categoryId
+      ? `http://localhost:8080/category/updateCategory`
+      : `http://localhost:8080/category/addCategory`;
+
+    const body = formData.categoryId
+      ? new URLSearchParams({
+          categoryId: formData.categoryId || "",
+          categoryType: formData.categoryType,
+          categoryName: formData.categoryName,
+          personId: String(personId),
+        })
+      : new URLSearchParams({
+          categoryType: formData.categoryType,
+          categoryName: formData.categoryName,
+          personId: String(personId),
+        });
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body,
+      });
+
+      if (response.ok) {
+        alert(
+          formData.categoryId ? "Категория обновлена!" : "Категория добавлена!"
+        );
+        setIsModalOpen(false);
+        fetchCategories();
+      } else {
+        const errorData = await response.text();
+        alert(`Ошибка: ${errorData || "Не удалось сохранить категорию"}`);
+      }
+    } catch (error) {
+      alert("Ошибка сохранения категории!");
+    }
   };
 
   const handleInputChange = (e) => {
@@ -41,37 +112,17 @@ const CategoryPageContent = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const payload = new URLSearchParams({
-      categoryType: formData.categoryType,
-      categoryName: formData.categoryName,
-      personId: "2",
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setFormData({
+      categoryType: activeTab,
+      categoryName: "",
+      categoryId: null,
     });
+  };
 
-    try {
-      const response = await fetch(
-        "http://localhost:8080/category/addCategory",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: payload.toString(),
-        }
-      );
-
-      if (response.ok) {
-        alert("Категория добавлена!");
-        handleCloseModal();
-        fetchCategories();
-      } else {
-        const errorData = await response.text();
-        alert(`Ошибка: ${errorData || "Не удалось добавить категорию"}`);
-      }
-    } catch (error) {
-      alert("Ошибка отправки данных!");
-    }
+  const handleTabSwitch = (tab) => {
+    setActiveTab(tab);
   };
 
   useEffect(() => {
@@ -110,8 +161,8 @@ const CategoryPageContent = () => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th>Категория</th>
-            <th>Ред/Удал</th>
+            <th>Категории {activeTab}</th>
+            <th>Действия</th>
           </tr>
         </thead>
         <tbody>
@@ -119,19 +170,26 @@ const CategoryPageContent = () => {
             <tr key={category.categoryId}>
               <td>{category.categoryName}</td>
               <td>
-                <i className="fas fa-pen" title="Редактировать"></i>
-                &nbsp;&nbsp;
-                <i
-                  className="fas fa-trash"
+                <span
+                  className={styles.icon}
+                  title="Редактировать"
+                  onClick={() => handleEditClick(category)}
+                >
+                  ✏️
+                </span>
+                <span
+                  className={styles.icon}
                   title="Удалить"
-                  style={{ color: "red", cursor: "pointer" }}
-                ></i>
+                  onClick={() => handleDeleteClick(category.categoryId)}
+                >
+                  🗑️
+                </span>
               </td>
             </tr>
           ))}
           {categories.length === 0 && (
             <tr>
-              <td colSpan="2">Нет данных для отображения</td>
+              <td colSpan="2">Нет категорий для отображения</td>
             </tr>
           )}
         </tbody>
@@ -140,7 +198,11 @@ const CategoryPageContent = () => {
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
-            <h2>Добавить категорию</h2>
+            <h2>
+              {formData.categoryId
+                ? "Редактировать категорию"
+                : "Добавить категорию"}
+            </h2>
             <form onSubmit={handleSubmit} className={styles.form}>
               <label>
                 Тип категории:
